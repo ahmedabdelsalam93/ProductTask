@@ -31,29 +31,20 @@ public class Main {
 
 
 
-    public static void addingProduct1(String nameOfProduct1 , String nameOfProduct2 , String nameOfProduct3)
+    public static void addingProduct1(String nameOfProduct1)
     {
         List<WebElement> productList = driver.findElements(By.cssSelector("h4.product-name"));
-        for (int i = 0 ; i <= productList.size(); i++ )
+
+        System.out.println(productList);
+        for (int i = 0 ; i < productList.size(); i++ )
         {
             String productName1 = productList.get(i).getText();
-            if(productName1.contains(nameOfProduct1))
+            if(productName1.contains(nameOfProduct1) )
             {
                 driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
 
             }
-            String productName2 = productList.get(i).getText();
-            if(productName2.contains(nameOfProduct2))
-            {
-                driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
 
-            }
-            String productName3 = productList.get(i).getText();
-            if(productName3.contains(nameOfProduct3))
-            {
-                driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
-                break;
-            }
 
 
         }
@@ -61,13 +52,29 @@ public class Main {
 
     }
 
-    /*public static void addingProduct2(String nameOfProduct2)
-    {
+    public static void addingProduct2(String nameOfProduct2) throws InterruptedException {
         List<WebElement> productList = driver.findElements(By.cssSelector("h4.product-name"));
         for (int i = 0 ; i < productList.size(); i++ )
         {
-            String productName2 = productList.get(i).getText();
-            if(productName2.contains(nameOfProduct2))
+            String productName1 = productList.get(i).getText();
+            if(productName1.contains(nameOfProduct2))
+            {
+                driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+                break;
+            }
+        }
+
+    }
+
+
+    public static void addingProduct3(String nameOfProduct3) throws InterruptedException {
+        Thread.sleep(5000);
+
+        List<WebElement> productList = driver.findElements(By.cssSelector("h4.product-name"));
+        for (int i = 0 ; i < productList.size(); i++ )
+        {
+            String productName1 = productList.get(i).getText();
+            if(productName1.contains(nameOfProduct3))
             {
                 driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
                 break;
@@ -76,22 +83,6 @@ public class Main {
 
 
     }
-
-    public static void addingProduct3(String nameOfProduct3)
-    {
-        List<WebElement> productList = driver.findElements(By.cssSelector("h4.product-name"));
-        for (int i = 0 ; i < productList.size(); i++ )
-        {
-            String productName3 = productList.get(i).getText();
-            if(productName3.contains(nameOfProduct3))
-            {
-                driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
-                break;
-            }
-        }
-
-
-    }*/
 
     public static void clickOnCart (){
         WebElement cartIcon = driver.findElement(By.cssSelector(".cart-icon"));
@@ -124,7 +115,9 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         navigateTo();
-        addingProduct1(productName1,productName2,productName3);
+        addingProduct1(productName1);
+        addingProduct2(productName2);
+        addingProduct3(productName3);
         clickOnCart();
         applyPromocode(promoC);
 
